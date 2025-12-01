@@ -81,10 +81,13 @@ jikan_mkdir(const char *path)
 {
 	struct stat st = {0};
 	if (stat(path, &st) != 0) {
-		if (mkdir(path, 0700) != 0) {
-			perror("Failed to make .jikan directory!");
-			return 1;
-		}
+		perror("Failed to stat directory!");
+		return 1;
+	}
+
+	if (mkdir(path, 0700) != 0) {
+		perror("Failed to make .jikan directory!");
+		return 1;
 	}
 
 	return 0;
