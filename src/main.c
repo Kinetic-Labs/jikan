@@ -1,5 +1,6 @@
 #include "00_config.c"
-#include "0_util.c"
+#include "01_util.c"
+#include "02_user_config.c"
 #include "init.c"
 #include "setup.c"
 #include <stdio.h>

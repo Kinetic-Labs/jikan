@@ -1,3 +1,4 @@
 jikan
 
+*.dSYM
 .DS_Store
