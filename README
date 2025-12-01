@@ -1,0 +1,31 @@
+Jikan
+---
+A time machine for your dependencies
+
+Note!:
+  Currently a work-in-progress
+
+Usage:
+  To start, setup Jikan:
+	jikan setup
+  this will launch a wizzard and ask some questions.
+
+  With Jikan set up, in your project run:
+	jikan init
+
+  Now everytime a dependency is changed, run:
+	jikan update
+
+  And to view timeline:
+	jikan timeline
+
+	output:
+	[dependency name] was [updated/downgraded] on [date] by [user] ([hash here])
+
+
+License:
+  Jikan is licensed under the GPL-3 license
+  See the COPYING file for more details!
+
+  © 2025, Kinetic Labs <https://github.com/Kinetic-Labs>
+
