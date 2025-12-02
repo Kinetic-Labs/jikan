@@ -1,4 +1,7 @@
 jikan
 
+gcc*
+g++*
 *.dSYM
+
 .DS_Store

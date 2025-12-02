@@ -3,7 +3,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#define CONFIG_LEN 128
+#define CONFIG_LEN 1024
 #define CONFIG_FILENAME "config.conf"
 
 typedef struct {
@@ -94,7 +94,8 @@ jikan_print_user_config(void)
 	jikan_config conf = {.kv = NULL, .len = 0};
 
 	if (jikan_parse_config(config_path, &conf) == 0 && conf.len)
-		printf("Current User: %s <%s>\n", conf.kv[0], conf.kv[1]);
+		if(printf("Current User: %s <%s>\n", conf.kv[0], conf.kv[1]) < 0)
+			perror("printf");
 
 	free(config_path);
 }

@@ -22,21 +22,29 @@ jikan_setup_user(void)
 	jikan_print_user_config();
 	char name[128], email[512];
 
-	printf("What is your name? ");
-	fgets(name, sizeof name, stdin);
+	if (printf("What is your name? ") < 0)
+		perror("printf");
+	if (fgets(name, sizeof name, stdin) == NULL)
+		perror("scanf error - reading name");
 	jikan_delete_newline(name);
 
-	printf("What is your email? ");
-	scanf("%s", email);
+	if (printf("What is your email? ") < 0)
+		perror("printf");
+	if (scanf("%s", email) != 1)
+		perror("scanf error - reading email");
 	jikan_delete_newline(email);
 
-	printf("You are %s <%s>, is that correct? ", name, email);
+	if (printf("You are %s <%s>, is that correct? ", name, email) < 0)
+		perror("printf");
+
 	if (jikan_prompt_confirm()) {
 		save_config(name, email);
-		printf("Thank you!\nYou can change this at any time by "
-		       "re-running `jikan setup`\n");
+		if (printf("Thank you!\nYou can change this at any time by "
+		       "re-running `jikan setup`\n") < 0)
+			perror("printf");
 	} else {
-		printf("Changes not saved! Rerun with `jikan setup` if you "
-		       "wish to reenter your information\n");
+		if (printf("Changes not saved! Rerun with `jikan setup` if you "
+		       "wish to reenter your information\n") < 0)
+				 perror("printf");
 	}
 }

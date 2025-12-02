@@ -17,6 +17,8 @@ main(const int argc, char **argv)
 		goto init;
 	} else if (strcmp("setup", command) == 0) {
 		goto setup;
+	} else if (strcmp("help", command) == 0) {
+		goto help;
 	} else {
 		goto usage;
 	}
@@ -27,8 +29,11 @@ init:
 setup:
 	jikan_setup_user();
 	return 0;
-
+help:
+	jikan_log(INFO, "usage: %s <setup,help> [...args]", NAME);
+	return 0;
 usage:
 	jikan_log(ERROR, "usage: %s <command> [...args]", NAME);
+	jikan_log(INFO, "run with 'help' command for more information");
 	return 1;
 }

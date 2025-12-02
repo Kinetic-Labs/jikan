@@ -26,7 +26,8 @@ jikan_log(enum LogLevel level, const char *format, ...)
 	va_start(args, format);
 	vprintf(format, args);
 	va_end(args);
-	printf("\n");
+	if (printf("\n") < 0)
+		perror("printf");
 }
 
 bool
@@ -34,8 +35,10 @@ jikan_prompt_confirm(void)
 {
 	char confirm[4];
 
-	printf("[y/n] ");
-	scanf("%s", confirm);
+	if (printf("[y/n] ") < 0)
+		perror("printf");
+	if (scanf("%s", confirm) != 1)
+		perror("scanf error - reading y/n");
 
 	if (strncmp("y", confirm, 1) == 0) {
 		return true;
@@ -57,10 +60,8 @@ jikan_split_string(char *string, const char *delimeter)
 {
 	char *token = strtok(string, delimeter);
 
-	while (token != NULL) {
-		printf("%s\n", token);
+	while (token != NULL)
 		token = strtok(NULL, delimeter);
-	}
 }
 
 int
