@@ -1,5 +1,5 @@
 #!/bin/bash
 set -eu
-gcc-15 -o jikan --debug -std=c99 -Werror -Wall src/main.c
+gcc-15 -o jikan --debug -std=c99 -Werror -Wall -pedantic src/main.c
 lldb ./jikan
 
