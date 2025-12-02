@@ -9,10 +9,11 @@
 int
 main(const int argc, char **argv)
 {
+	const char *command;
 	if (argc < 2)
 		goto usage;
 
-	const char *command = argv[1];
+	command = argv[1];
 	if (strcmp("init", command) == 0) {
 		goto init;
 	} else if (strcmp("setup", command) == 0) {

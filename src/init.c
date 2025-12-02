@@ -3,14 +3,14 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-void
+static void
 jikan_init_tracking(void)
 {
 	struct stat st = {0};
-	const char path[10] = "./.jikan/";
+	const char path[] = "./.jikan/";
 
 	if (stat(path, &st) == -1)
 		mkdir(path, 0700);
 
-	jikan_log(INFO, "sucessfully initialized Jikan!");
+	jikan_log(INFO, "successfully initialized Jikan!");
 }

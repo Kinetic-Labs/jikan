@@ -7,89 +7,68 @@
 
 enum LogLevel { INFO = 0, WARN, ERROR };
 
-void
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wswitch-default"
+static void
 jikan_log(enum LogLevel level, const char *format, ...)
 {
+	va_list args;
+	va_start(args, format);
+
 	switch (level) {
-	case 0:
-		printf("info:  ");
+	case INFO:
+		if (printf("info:  ") < 0)
+			perror("printf");
 		break;
-	case 1:
-		printf("warn:  ");
+	case WARN:
+		if (printf("warn:  ") < 0)
+			perror("printf");
 		break;
-	case 2:
-		printf("error: ");
+	case ERROR:
+		if (printf("error: ") < 0)
+			perror("printf");
 		break;
 	}
 
-	va_list args;
-	va_start(args, format);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wformat-nonliteral"
 	vprintf(format, args);
+#pragma clang diagnostic pop
 	va_end(args);
+
 	if (printf("\n") < 0)
 		perror("printf");
 }
+#pragma clang diagnostic pop
 
-bool
+static bool
 jikan_prompt_confirm(void)
 {
 	char confirm[4];
 
 	if (printf("[y/n] ") < 0)
 		perror("printf");
-	if (scanf("%s", confirm) != 1)
+	if (scanf("%3s", confirm) != 1)
 		perror("scanf error - reading y/n");
 
-	if (strncmp("y", confirm, 1) == 0) {
-		return true;
-	} else {
-		return false;
-	}
+	return strncmp("y", confirm, 1) == 0;
 }
 
-void
+static void
 jikan_delete_newline(char *string)
 {
-	const int len = strlen(string);
-	if (string[len - 1] == '\n')
-		string[len - 1] = 0;
+	const int len = (int)strlen(string);
+	if (len > 0 && string[len - 1] == '\n')
+		string[len - 1] = '\0';
 }
 
-void
-jikan_split_string(char *string, const char *delimeter)
-{
-	char *token = strtok(string, delimeter);
-
-	while (token != NULL)
-		token = strtok(NULL, delimeter);
-}
-
-int
+static int
 jikan_get_home(char **home)
 {
-	// todo: add windows compat
 	*home = getenv("HOME");
 	if (*home == NULL) {
-		jikan_log(ERROR, "HOME environment variable not set!\n");
+		jikan_log(ERROR, "HOME environment variable not set!");
 		return 1;
 	}
-
-	return 0;
-}
-
-int
-jikan_mkdir(const char *path)
-{
-	struct stat st = {0};
-	if (stat(path, &st) != 0) {
-		perror("Failed to stat directory!");
-		return 1;
-	}
-
-	if (mkdir(path, 0700) != 0) {
-		perror("Failed to make .jikan directory!");
-		return 1;
-	}
-
 	return 0;
 }
