@@ -1,3 +1,4 @@
+#include "../config.h"
 #include "00_config.c"
 #include "01_util.c"
 #include "02_user_config.c"
@@ -10,6 +11,8 @@ int
 main(const int argc, char **argv)
 {
 	const char *command;
+	jikan_log(INFO, "%s v%s compiled with %s\n", NAME, VERSION, CC);
+
 	if (argc < 2)
 		goto usage;
 

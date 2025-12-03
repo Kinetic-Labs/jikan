@@ -6,5 +6,6 @@ clang*
 clang++*
 *.dSYM
 *.o
+config.h
 
 .DS_Store
