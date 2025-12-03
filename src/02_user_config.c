@@ -5,9 +5,6 @@
 
 #define CONFIG_LEN 1024
 #define CONFIG_FILENAME "config.conf"
-#ifndef NAME
-#define NAME "jikan"
-#endif
 
 typedef struct {
 	char **kv;
