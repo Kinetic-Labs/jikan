@@ -24,7 +24,9 @@ configure_file(
 sources = files('src/main.c')
 inc_dirs = include_directories('.')
 
-base_args = []
+base_args = [
+	'-Wno-poison-system-directories'
+]
 link_args = []
 
 if compiler_name == 'clang'

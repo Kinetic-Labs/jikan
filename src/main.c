@@ -4,6 +4,7 @@
 #include "02_user_config.c"
 #include "init.c"
 #include "setup.c"
+#include "timeline.c"
 #include <stdio.h>
 #include <string.h>
 
@@ -23,6 +24,8 @@ main(const int argc, char **argv)
 		goto setup;
 	} else if (strcmp("help", command) == 0) {
 		goto help;
+	} else if (strcmp("timeline", command) == 0) {
+		goto timeline;
 	} else {
 		goto usage;
 	}
@@ -32,6 +35,9 @@ init:
 	return 0;
 setup:
 	jikan_setup_user();
+	return 0;
+timeline:
+	jikan_timeline();
 	return 0;
 help:
 	jikan_log(INFO, "usage: %s <setup,help> [...args]", NAME);

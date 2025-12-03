@@ -64,13 +64,13 @@ jikan_parse_config(const char *path, jikan_config *out)
 }
 
 static void
-jikan_config_free(jikan_config *c)
+jikan_config_free(jikan_config *config)
 {
-	for (size_t i = 0; i < c->len; ++i)
-		free(c->kv[i]);
-	free(c->kv);
-	c->kv = NULL;
-	c->len = 0;
+	for (size_t i = 0; i < config->len; ++i)
+		free(config->kv[i]);
+	free(config->kv);
+	config->kv = NULL;
+	config->len = 0;
 }
 
 static void
