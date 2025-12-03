@@ -19,9 +19,12 @@ Usage:
   And to view timeline:
 	jikan timeline
 
-	output:
-	[dependency name] was [updated/downgraded] on [date] by [user] ([hash here])
+	output example:
+	Timeline
+	=========
 
+	Jun 19, 2024:
+ 	  Update (minor) By John Doe <john.doe@example.com>: 'typescript' 5.9.3 -> 5.9.4
 
 License:
   Jikan is licensed under the GPL-3 license
