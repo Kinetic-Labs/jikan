@@ -22,8 +22,13 @@ jikan_save_config(const char *directory, const char *filename, const char *data)
 	FILE *file_p;
 	size_t data_len;
 
-	if (stat(directory, &st) == -1)
+	if (stat(directory, &st) == -1) {
+#if defined(_WIN32) || defined(__MINGW32__)
+		mkdir(directory);
+#else
 		mkdir(directory, 0700);
+#endif
+	}
 
 	snprintf(path, sizeof path, "%s/%s", directory, filename);
 	file_p = fopen(path, "w");

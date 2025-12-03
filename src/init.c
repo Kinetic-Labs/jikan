@@ -9,8 +9,13 @@ jikan_init_tracking(void)
 	struct stat st = {0};
 	const char path[] = "./.jikan/";
 
-	if (stat(path, &st) == -1)
+	if (stat(path, &st) == -1) {
+#if defined(_WIN32) || defined(__MINGW32__)
+		mkdir(path);
+#else
 		mkdir(path, 0700);
+#endif
+	}
 
 	jikan_log(INFO, "successfully initialized Jikan!");
 }

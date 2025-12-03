@@ -1,11 +1,11 @@
-jikan
+builddir
+build-*
 
 gcc*
 g++*
 clang*
 clang++*
 *.dSYM
-*.o
 config.h
 
 .DS_Store
